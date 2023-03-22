@@ -31,9 +31,26 @@ def rename_with_folder():
       new_file_name = folder_name +'-'+ path.name
       new_folder_name = path.with_name(new_file_name)
       path.rename(new_folder_name)
-    
+
+def rename_sub_sub_folder():
+  """THIS FUNCTION RENAME WITH TWO SUB DIRECTORIES"""
+  root_dir= Path('files3')
+  #go into two sun directory
+  file_path = root_dir.glob("**/**/*") 
+  for path in file_path:
+    #do somethig if the it is file skip the just folder
+    if path.is_file():
+      print(f"Existing files and path \n {path}")
+      folder_names = path.parts[-3] +"-"+  path.parts[-2]
+      new_file_name= folder_names+'-'+path.name
+      new_folder_name = path.with_name(new_file_name)
+      print(f"Renamed file path \n  {new_folder_name}")
+      path.rename(new_folder_name)
+  
 #rename_file(name="abat-")
 #rename_with_folder()
+#rename_sub_sub_folder()
+
 
 
   
