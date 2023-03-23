@@ -1,6 +1,7 @@
 from pathlib import Path
 from datetime import datetime
 
+
 def rename_file(name="new"):
   """This takes the argument that provided and the files as an prefix"""
 
@@ -69,14 +70,31 @@ def rename_file_with_date():
     print("--------------------------")
 
 
-rename_file_with_date()
+
+
+def convert_timestamp_to_time(given_time):
+  """Takes the timesamp argument and convert the time as following
+  string format %Y-%m-%d-%H:%M:%S """
+  return datetime.fromtimestamp(given_time).strftime("%Y-%m-%d-%H:%M:%S")
+
+
+def rename_folder_with_created_datetime():
+  root_dir = Path('files2')
+  #take all folder and files
+  file_path =  root_dir.glob("**/*")
+  for path in file_path:
+    #check the path has file and continue
+    if path.is_file():
+      created_time = path.stat().st_ctime
+      date_created_str = convert_timestamp_to_time(created_time )
+      new_file_name = date_created_str +'-'+ path.name
+      new_folder_name = path.with_name(new_file_name)
+      path.rename(new_folder_name)
+
+rename_folder_with_created_datetime()  
+
+#rename_file_with_date()
 #rename_file(name="abat-")
 #rename_with_folder()
 #rename_sub_sub_folder()
-
-
-
-  
-
-
 
