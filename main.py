@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import datetime
+import zipfile
 
 
 def rename_file(name="new"):
@@ -121,6 +122,18 @@ def create_empty_files():
     file_path = root_dir / Path(file_name)
     file_path.touch()
 
+
+def create_zip_files():
+
+  root_dir = Path('files5')
+  archive_path = root_dir / Path("archive.zip")
+
+  with zipfile.ZipFile(archive_path, 'w') as zf:
+    for path in root_dir.glob("*.txt"):
+      zf.write(path)
+
+
+#create_zip_files()
 
 #create_empty_files()
 #change_the_suffix(".txt",".csv")
