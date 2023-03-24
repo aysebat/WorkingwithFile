@@ -123,17 +123,23 @@ def create_empty_files():
     file_path.touch()
 
 
-def create_zip_files():
-
+def create_zip_files(unlink=True):
+  """Create a zip files in the folder with all the txt files
+  if unlink=True, this will delete all the files in the folder
+  if unlink=Flse, this will keep all files and create the zip file.
+  """
   root_dir = Path('files5')
   archive_path = root_dir / Path("archive.zip")
 
   with zipfile.ZipFile(archive_path, 'w') as zf:
     for path in root_dir.glob("*.txt"):
       zf.write(path)
+      #if unlink is True this delete all txt files
+      if unlink:
+        path.unlink()
 
 
-#create_zip_files()
+create_zip_files()
 
 #create_empty_files()
 #change_the_suffix(".txt",".csv")
