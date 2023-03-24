@@ -91,10 +91,31 @@ def rename_folder_with_created_datetime():
       new_folder_name = path.with_name(new_file_name)
       path.rename(new_folder_name)
 
-rename_folder_with_created_datetime()  
+def rename_the_suffix_of_file(suffix = "csv"):
+  root_dir = Path('files4')
+  file_path = root_dir.iterdir()
+  for path in file_path:
+    new_file_name = path.parts[1].split(".")[0] +"."+ suffix
+    new_folder_name = path.with_name(new_file_name )
+    path.rename(new_folder_name)
+    
+def change_the_suffix(cur_suffix, new_suffix):
+  root_dir = Path('files4')
+  #rglob searh for all sub folder
+  for path in root_dir.rglob(f"*{cur_suffix}"):
+    if path.is_file():
+      name_with_new_suffix = path.with_suffix(new_suffix)
+      path.rename(name_with_new_suffix)
+    
+#change_the_suffix(".txt",".csv")
+
+
+#rename_the_suffix_of_file("csv")
+
 
 #rename_file_with_date()
 #rename_file(name="abat-")
 #rename_with_folder()
 #rename_sub_sub_folder()
+#rename_folder_with_created_datetime()  
 
