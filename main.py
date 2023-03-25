@@ -154,6 +154,17 @@ def unzip_file():
       zf.extractall(path=final_path)
 
 
+def search_item_in_path(search="14"):
+  """This function is search the given item in all subdirectories"""
+  root_dir = Path('.')
+
+  for path in root_dir.rglob('*'):
+    if search in path.stem:
+      print(path.absolute())
+
+
+#search_item_in_path("14")
+
 #unzip_file()
 
 #create_zip_files()
