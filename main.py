@@ -129,7 +129,7 @@ def create_zip_files(unlink=True):
   if unlink=Flse, this will keep all files and create the zip file.
   """
   root_dir = Path('files5')
-  archive_path = root_dir / Path("archive.zip")
+  archive_path = root_dir / Path("archive2.zip")
 
   with zipfile.ZipFile(archive_path, 'w') as zf:
     for path in root_dir.glob("*.txt"):
@@ -139,7 +139,24 @@ def create_zip_files(unlink=True):
         path.unlink()
 
 
-create_zip_files()
+def unzip_file():
+  root_dir = Path('files5')
+  unzip_dir = Path('unzip')
+
+  for path in root_dir.glob("*.zip"):
+
+    #print(f"Path: {path}")
+    final_path = root_dir / unzip_dir / Path(path.stem)
+    print(final_path)
+    with zipfile.ZipFile(path, 'r') as zf:
+      print(zf)
+      print(f"Path.stem: {Path(path.stem)}")
+      zf.extractall(path=final_path)
+
+
+#unzip_file()
+
+#create_zip_files()
 
 #create_empty_files()
 #change_the_suffix(".txt",".csv")
